@@ -20,8 +20,37 @@ async function fetchTickets() {
         displayTickets(data);
     } catch (error) { //Used to handle errors
         errorMessage.textContent = `Error: ${error.message}`; //Error message will display 
+    
+        // Task 4: Use finally to Ensure Cleanup
     } finally {
         console.log('Fetch attempt completed!'); //  // If there are any loding indicators, message will display 
     }
 }
+
+// Taks 3: Display Tickets Dynamically on the Page
+
+function displayTickets(tickets) {
+    const ticketContainer = document.getElementById('ticketContainer');
+    ticketContainer.innerHTML = ''; // Used to clear container
+
+    tickets.forEach(ticket => { //Used to search through all tickets 
+        const ticketElement = document.createElement('div');
+        ticketElement.classList.add('ticket'); // and add ticket to list. 
+
+        // Used to set the inner HTML of the ticket ID, custmer name, description and details. 
+        ticketElement.innerHTML = `
+            <h3>Ticket ID: ${ticket.id}</h3>
+            <p>Customer Name: User ${ticket.userId}</p>
+            <p>Issue Description: ${ticket.title}</p> 
+            <p>Details: ${ticket.body}</p>
+        `;
+
+        //Used to add ticket elements to the tickets container. 
+        ticketContainer.appendChild(ticketElement); 
+    });
+}
+
+// fetchTicket function called to begin processes. 
+fetchTickets();
+
 
